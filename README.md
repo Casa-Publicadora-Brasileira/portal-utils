@@ -33,7 +33,7 @@ _Tendo como todos os parâmetros opcionais._
 ```php
 <?php
 
-use CasaPublicadoraBrasileira\PortalUtils\HTTP;
+use CasaPublicadoraBrasileira\PortalUtils\HTTP\Response;
 
 return Response::success('Sucesso ao buscar os dados', ['id' => 1, 'name' => 'Teste']);
 ```
@@ -45,7 +45,7 @@ _Tendo como todos os parâmetros opcionais._
 ```php
 <?php
 
-use CasaPublicadoraBrasileira\PortalUtils\Response;
+use CasaPublicadoraBrasileira\PortalUtils\HTTP\Response;
 
 catch (Exception $e) {
     return Response::error('Erro ao buscar os dados', $e);
@@ -59,7 +59,7 @@ _Tendo como todos os parâmetros opcionais._
 ```php
 <?php
 
-use CasaPublicadoraBrasileira\PortalUtils\Response;
+use CasaPublicadoraBrasileira\PortalUtils\HTTP\Response;
 
 return Response::warning('E-mail já cadastrado', ['email' => 'teste@teste.com'], 200);
 ```
