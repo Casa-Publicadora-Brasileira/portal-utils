@@ -10,12 +10,12 @@ use Exception;
 class Response
 {
 
-    public static function success(string $msg = null, $data = null, array $params = [], bool $mobile = false): string
+    public static function success(string $msg = null, $data = null, array $params = [], bool $mobile = false)
     {
         return self::json(true, $msg, $data, $mobile, null, $params);
     }
 
-    public static function error(string $msg = null, Exception $exception = null, array $params = [], bool $mobile = false, int $http = HttpCodesEnum::InternalError): string
+    public static function error(string $msg = null, Exception $exception = null, array $params = [], int $http = HttpCodesEnum::InternalError, bool $mobile = false)
     {
         $erro = null;
         if (isset($exception)) {
@@ -30,30 +30,28 @@ class Response
         return self::json(false, $msg, null, $mobile, $erro, $params, $http);
     }
 
-    public static function warning(string $msg = null, $data = null, int $http = HttpCodesEnum::Success): string
+    public static function warning(string $msg = null, Exception $exception = null, $data = null, array $params = [], int $http = HttpCodesEnum::Success, bool $mobile = false)
     {
-        http_response_code($http);
-        return json_encode(self::cleanData(['ret' => ResponseEnum::FailedResponse, 'msg' => $msg, 'data' => $data]));
+        return self::json(false, $msg, $data, $mobile, $exception, $params, $http);
     }
 
-    private static function json(bool $success, string $msg = null, $data = null, bool $mobile = false, string $erro = null, array $params = [], int $http = HttpCodesEnum::InternalError): string
+    private static function json(bool $success, string $msg = null, $data = null, bool $mobile = false, string $erro = null, array $params = [], int $http = HttpCodesEnum::InternalError)
     {
-        http_response_code($http);
         if ($mobile) {
             if ($success) {
-                return json_encode(self::cleanData(['success' => true, 'last_released' => self::getLastUpdatedAt($data), 'data' => $data, 'msg' => $msg] + $params));
+                return response()->json(self::cleanData(['success' => true, 'last_released' => self::getLastUpdatedAt($data), 'data' => $data, 'msg' => $msg] + $params), $http);
             }
-            return json_encode(self::cleanData(['success' => false, 'msg' => $msg, 'erro' => $erro] + $params), $http);
+            return response()->json(self::cleanData(['success' => false, 'msg' => $msg, 'erro' => $erro] + $params), $http);
         }
         if ($success) {
-            return json_encode(self::cleanData(['ret' => ResponseEnum::SuccessResponse, 'msg' => $msg, 'data' => $data] + $params));
+            return response()->json(self::cleanData(['ret' => ResponseEnum::SuccessResponse, 'msg' => $msg, 'data' => $data] + $params), $http);
         }
-        return json_encode(self::cleanData(['ret' => ResponseEnum::FailedResponse, 'msg' => $msg, 'erro' => $erro] + $params), $http);
+        return response()->json(self::cleanData(['ret' => ResponseEnum::FailedResponse, 'msg' => $msg, 'erro' => $erro] + $params), $http);
     }
 
     private static function cleanData($data): array
     {
-        return array_filter($data, fn ($value, $key) => !empty($value) || $key == 'data', ARRAY_FILTER_USE_BOTH);
+        return array_filter($data, fn ($value, $key) => !empty($value) || $key == 'data' || $key == 'ret' || $key == 'success', ARRAY_FILTER_USE_BOTH);
     }
 
     private static function getLastUpdatedAt($data): string
