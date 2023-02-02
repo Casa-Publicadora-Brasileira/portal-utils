@@ -1,0 +1,29 @@
+{
+    "name": "casa-publicadora-brasileira/portal-utils",
+    "type": "library",
+    "description": "Ferramentas genéricas do Portal da Educação da CPB",
+    "keywords": [
+        "library",
+        "utils",
+        "Poratl da educação",
+        "response",
+        "CPB"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/Casa-Publicadora-Brasileira/portal-utils",
+    "authors": [
+        {
+            "name": "Josué Oliveira",
+            "email": "josue.oliveira@cpb.com.br",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "CasaPublicadoraBrasileira\\PortalUtils\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.4"
+    }
+}
