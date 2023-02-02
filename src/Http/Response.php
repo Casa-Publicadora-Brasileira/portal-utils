@@ -39,12 +39,12 @@ class Response
     {
         if ($mobile) {
             if ($success) {
-                return response()->json(self::cleanData(['success' => true, 'last_released' => self::getLastUpdatedAt($data), 'data' => $data, 'msg' => $msg] + $params), $http);
+                return response()->json(self::cleanData(['success' => true, 'last_released' => self::getLastUpdatedAt($data), 'data' => $data, 'msg' => $msg] + $params));
             }
             return response()->json(self::cleanData(['success' => false, 'msg' => $msg, 'erro' => $erro] + $params), $http);
         }
         if ($success) {
-            return response()->json(self::cleanData(['ret' => ResponseEnum::SuccessResponse, 'msg' => $msg, 'data' => $data] + $params), $http);
+            return response()->json(self::cleanData(['ret' => ResponseEnum::SuccessResponse, 'msg' => $msg, 'data' => $data] + $params));
         }
         return response()->json(self::cleanData(['ret' => ResponseEnum::FailedResponse, 'msg' => $msg, 'erro' => $erro] + $params), $http);
     }
