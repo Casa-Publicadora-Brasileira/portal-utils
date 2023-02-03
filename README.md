@@ -61,5 +61,5 @@ _Tendo como todos os parâmetros opcionais._
 
 use CasaPublicadoraBrasileira\PortalUtils\HTTP\Response;
 
-return Response::warning('E-mail já cadastrado', null, ['email' => 'teste@teste.com'], [], 200);
+return Response::warning('E-mail já cadastrado', ['email' => 'teste@teste.com'], [], 200);
 ```

@@ -30,9 +30,9 @@ class Response
         return self::json(false, $msg, null, $mobile, $erro, $params, $http);
     }
 
-    public static function warning(string $msg = null, Exception $exception = null, $data = null, array $params = [], int $http = HttpCodesEnum::Success, bool $mobile = false)
+    public static function warning(string $msg = null, $data = null, array $params = [], int $http = HttpCodesEnum::Success, bool $mobile = false)
     {
-        return self::json(false, $msg, $data, $mobile, $exception, $params, $http);
+        return self::json(false, $msg, $data, $mobile, null, $params, $http);
     }
 
     private static function json(bool $success, string $msg = null, $data = null, bool $mobile = false, string $erro = null, array $params = [], int $http = HttpCodesEnum::InternalError)
