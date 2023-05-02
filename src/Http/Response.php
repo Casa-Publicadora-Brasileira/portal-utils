@@ -4,6 +4,7 @@ namespace CasaPublicadoraBrasileira\PortalUtils\Http;
 
 use CasaPublicadoraBrasileira\PortalUtils\Enums\HttpCodesEnum;
 use CasaPublicadoraBrasileira\PortalUtils\Enums\ResponseEnum;
+use CasaPublicadoraBrasileira\PortalUtils\Exceptions\ExceptionHandler;
 use Illuminate\Support\Env;
 use Exception;
 
@@ -19,12 +20,10 @@ class Response
     {
         $erro = null;
         if (isset($exception)) {
-            if (Env::get('APP_ENV') != 'production') {
+            if (app()->isLocal()) {
                 $erro = $exception->getMessage();
             }
-            if (App()->bound('sentry') && Env::get('APP_ENV') != 'local') {
-                App('sentry')->captureException($exception);
-            }
+            ExceptionHandler::handler($exception, request());
         }
 
         return self::json(false, $msg, null, $mobile, $erro, $params, $http);
