@@ -30,6 +30,6 @@ class OperationExceptionBuilder implements ErrorResponseBuilder
 
     public function registerSentry(Throwable $exception)
     {
-        app('sentry')->captureException($exception);
+        // app('sentry')->captureException($exception);
     }
 }
