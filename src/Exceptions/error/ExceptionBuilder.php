@@ -20,11 +20,17 @@ class ExceptionBuilder implements ErrorResponseBuilder
 
     public function build(Throwable $exception)
     {
-        return [
+        $data = [
             'code' => $this->statusCode($exception),
             'key' => 'errors.internal_server_error',
             'msg' => __('cpb::errors.internal_server_error'),
         ];
+
+        if (app()->isLocal()) {
+            $data['error'] = $exception->getMessage();
+        }
+
+        return $data;
     }
 
     public function registerSentry(Throwable $exception)
