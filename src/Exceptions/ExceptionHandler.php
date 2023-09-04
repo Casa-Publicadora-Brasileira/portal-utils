@@ -11,7 +11,10 @@ use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\MethodNotAllowedHttpE
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\ValidationExceptionBuilder;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\NotFoundHttpExceptionBuilder;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\AccessDeniedHttpExceptionBuilder;
+use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\AuthenticationExceptionBuilder;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\ExceptionBuilder;
+use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\HttpExceptionBuilder;
+use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\JWTExceptionBuilder;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\OperationExceptionBuilder;
 use Illuminate\Http\Request;
 use Sentry\State\Scope;
@@ -34,6 +37,9 @@ class ExceptionHandler
             new ValidationExceptionBuilder(),
             new NotFoundHttpExceptionBuilder(),
             new AccessDeniedHttpExceptionBuilder(),
+            new JWTExceptionBuilder(),
+            new HttpExceptionBuilder(),
+            new AuthenticationExceptionBuilder()
         ];
     }
 
