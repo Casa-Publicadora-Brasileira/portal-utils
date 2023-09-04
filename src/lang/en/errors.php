@@ -7,4 +7,5 @@ return [
     'token_expired' => 'Expired token',
     'token_invalid' => 'Invalid token',
     'blacklisted_token' => 'Blocked token',
+    'not_authenticated' => 'Not authenticated',
 ];

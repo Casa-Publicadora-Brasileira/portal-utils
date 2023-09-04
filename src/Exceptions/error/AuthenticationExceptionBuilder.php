@@ -23,8 +23,8 @@ class AuthenticationExceptionBuilder implements ErrorResponseBuilder
     {
         return [
             'code' => $this->statusCode($exception),
-            'key' => 'errors.token_expired',
-            'msg' => __('cpb::errors.token_expired'),
+            'key' => 'errors.not_authenticated',
+            'msg' => __('cpb::errors.not_authenticated'),
         ];
     }
 
