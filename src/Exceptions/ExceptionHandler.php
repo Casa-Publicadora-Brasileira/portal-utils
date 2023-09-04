@@ -13,6 +13,8 @@ use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\NotFoundHttpException
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\AccessDeniedHttpExceptionBuilder;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\AuthenticationExceptionBuilder;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\ExceptionBuilder;
+use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\HttpExceptionBuilder;
+use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\JWTExceptionBuilder;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\OperationExceptionBuilder;
 use Illuminate\Http\Request;
 use Sentry\State\Scope;
@@ -35,7 +37,9 @@ class ExceptionHandler
             new ValidationExceptionBuilder(),
             new NotFoundHttpExceptionBuilder(),
             new AccessDeniedHttpExceptionBuilder(),
-            new AuthenticationExceptionBuilder(),
+            new JWTExceptionBuilder(),
+            new HttpExceptionBuilder(),
+            new AuthenticationExceptionBuilder()
         ];
     }
 
@@ -71,6 +75,8 @@ class ExceptionHandler
             $error->registerSentry($exception);
         }
 
-        return response()->json($error->build($exception), $error->statusCode($exception));
+        return response()->json($error->build($exception), $error->statusCode($exception), [
+            'Access-Control-Allow-Origin' => '*'
+        ]);
     }
 }

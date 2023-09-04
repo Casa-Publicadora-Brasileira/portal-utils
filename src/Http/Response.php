@@ -45,7 +45,9 @@ class Response
         if ($success) {
             return response()->json(self::cleanData(['ret' => ResponseEnum::SuccessResponse, 'msg' => $msg, 'data' => $data] + $params));
         }
-        return response()->json(self::cleanData(['ret' => ResponseEnum::FailedResponse, 'msg' => $msg, 'erro' => $erro] + $params), $http);
+        return response()->json(self::cleanData(['ret' => ResponseEnum::FailedResponse, 'msg' => $msg, 'erro' => $erro] + $params), $http, [
+            'Access-Control-Allow-Origin' => '*'
+        ]);
     }
 
     private static function cleanData($data): array

@@ -4,37 +4,32 @@ namespace CasaPublicadoraBrasileira\PortalUtils\Exceptions\error;
 
 use CasaPublicadoraBrasileira\PortalUtils\Enums\HttpCodesEnum;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\ErrorResponseBuilder;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 
-class ExceptionBuilder implements ErrorResponseBuilder
+class HttpExceptionBuilder implements ErrorResponseBuilder
 {
     public function statusCode(Throwable $exception)
     {
-        return HttpCodesEnum::InternalError;
+        return HttpCodesEnum::Unauthorized;
     }
 
     public function accept(Throwable $exception)
     {
-        return true;
+        return $exception instanceof HttpException;
     }
 
     public function build(Throwable $exception)
     {
-        $data = [
+        return [
             'code' => $this->statusCode($exception),
-            'key' => 'errors.internal_server_error',
-            'msg' => __('cpb::errors.internal_server_error'),
+            'key' => 'errors.token_expired',
+            'msg' => __('cpb::errors.token_expired'),
         ];
-
-        if (app()->isLocal()) {
-            $data['error'] = $exception->getMessage();
-        }
-
-        return $data;
     }
 
     public function registerSentry(Throwable $exception)
     {
-        app('sentry')->captureException($exception);
+        // app('sentry')->captureException($exception);
     }
 }
