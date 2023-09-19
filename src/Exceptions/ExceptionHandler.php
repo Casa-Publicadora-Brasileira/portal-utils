@@ -68,9 +68,12 @@ class ExceptionHandler
                 }
                 $scope->setExtra('token', $request->bearerToken());
                 $scope->setExtra('query', $request->query->all());
-                $scope->setExtra('params', $request->route()->parameters());
                 $scope->setExtra('body', $request->request->all());
                 $scope->setExtra('request', $request->fullUrl());
+
+                if ($request->route()) {
+                    $scope->setExtra('params', $request->route()->parameters());
+                }
             });
             $error->registerSentry($exception);
         }
