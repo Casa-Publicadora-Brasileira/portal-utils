@@ -71,7 +71,7 @@ class ExceptionHandler
                 $scope->setExtra('body', $request->request->all());
                 $scope->setExtra('request', $request->fullUrl());
 
-                if ($request->route()) {
+                if (!empty($request->route())) {
                     $scope->setExtra('params', $request->route()->parameters());
                 }
             });
