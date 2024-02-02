@@ -78,8 +78,6 @@ class ExceptionHandler
             $error->registerSentry($exception);
         }
 
-        return response()->json($error->build($exception), $error->statusCode($exception), [
-            'Access-Control-Allow-Origin' => '*'
-        ]);
+        return response()->json($error->build($exception), $error->statusCode($exception));
     }
 }
