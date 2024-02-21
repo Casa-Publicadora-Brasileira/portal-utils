@@ -29,6 +29,7 @@ class AccessDeniedHttpExceptionBuilder implements ErrorResponseBuilder
 
     public function registerSentry(Throwable $exception)
     {
+        // Polices
         app('sentry')->captureException($exception);
     }
 }

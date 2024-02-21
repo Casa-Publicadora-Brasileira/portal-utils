@@ -28,15 +28,15 @@ class ExceptionHandler
     private function __construct()
     {
         $this->builders =  [
-            new OperationExceptionBuilder(),
+            new TokenBlacklistedExceptionBuilder(),
             new TokenExpiredExceptionBuilder(),
             new TokenInvalidExceptionBuilder(),
-            new TokenBlacklistedExceptionBuilder(),
             new UnauthorizedHttpExceptionBuilder(),
             new MethodNotAllowedHttpExceptionBuilder(),
-            new ValidationExceptionBuilder(),
             new NotFoundHttpExceptionBuilder(),
             new AccessDeniedHttpExceptionBuilder(),
+            new ValidationExceptionBuilder(),
+            new OperationExceptionBuilder(),
             new JWTExceptionBuilder(),
             new HttpExceptionBuilder(),
             new AuthenticationExceptionBuilder()
@@ -50,11 +50,8 @@ class ExceptionHandler
 
     private function translator(Throwable $exception, Request $request)
     {
-        $error = array_filter(
-            $this->builders,
-            fn (ErrorResponseBuilder $error) => $error->accept($exception)
-        );
-        $error = empty($error) ? new ExceptionBuilder() : last($error);
+        $error = collect($this->builders)
+            ->first(fn (ErrorResponseBuilder $error) => $error->accept($exception), new ExceptionBuilder());
 
         if (!app()->isLocal() && app()->bound('sentry')) {
             configureScope(function (Scope $scope) use ($request) {
