@@ -7,7 +7,7 @@ use Aws\Sns\SnsClient;
 
 class SnsDispatchResolver {
 
-    public function __construct(string $targetArn, array $message)
+    public static function send(string $targetArn, array $message): \Aws\Result
     {
         $client = new SnsClient([
             'region'      => config('services.sns.region'),
@@ -17,19 +17,12 @@ class SnsDispatchResolver {
             ),
         ]);
 
-        $json = json_encode([
-                'type' => 'COMMUNICATION',
-                'data' => [
-                    'id' => '1',
-                    'name'  => 'Teste134',
-                ]
-            ]
-        );
-
-        $client->publish([
+        $result = $client->publish([
             'TargetArn' => $targetArn,
             'Message' => json_encode($message),
             'MessageGroupId' => 1,
         ]);
+
+        return $result;
     }
 }
