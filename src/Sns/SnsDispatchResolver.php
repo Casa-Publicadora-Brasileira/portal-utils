@@ -23,6 +23,12 @@ class SnsDispatchResolver {
             'MessageGroupId' => 1,
             'MessageDeduplicationId' => $id,
             'MessageStructure' => 'json',
+            'MessageAttributes' => [
+                'Content-Type' => [
+                    'DataType' => 'String',
+                    'StringValue' => 'application/json',
+                ],
+            ]
         ]);
 
         return $result;
