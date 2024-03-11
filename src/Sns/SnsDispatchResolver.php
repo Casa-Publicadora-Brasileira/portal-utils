@@ -19,9 +19,10 @@ class SnsDispatchResolver {
 
         $result = $client->publish([
             'TargetArn' => $targetArn,
-            'Message' => json_encode($message),
+            'Message' => json_encode(['default' => json_encode($message)]),
             'MessageGroupId' => 1,
             'MessageDeduplicationId' => $id,
+            'MessageStructure' => 'json',
         ]);
 
         return $result;
