@@ -12,6 +12,7 @@ use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\ValidationExceptionBu
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\NotFoundHttpExceptionBuilder;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\AccessDeniedHttpExceptionBuilder;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\AuthenticationExceptionBuilder;
+use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\AuthorizationExceptionBuilder;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\ExceptionBuilder;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\HttpExceptionBuilder;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\JWTExceptionBuilder;
@@ -39,7 +40,8 @@ class ExceptionHandler
             new OperationExceptionBuilder(),
             new JWTExceptionBuilder(),
             new HttpExceptionBuilder(),
-            new AuthenticationExceptionBuilder()
+            new AuthenticationExceptionBuilder(),
+            new AuthorizationExceptionBuilder(),
         ];
     }
 
