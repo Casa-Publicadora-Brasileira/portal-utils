@@ -21,7 +21,7 @@ class SnsDispatchResolver {
             'TargetArn' => $targetArn,
             'Message' => json_encode(['default' => json_encode($message)]),
             'MessageGroupId' => 1,
-            'MessageDeduplicationId' => $id,
+            'MessageDeduplicationId' => md5(uniqid(time())),
             'MessageStructure' => 'json',
             'MessageAttributes' => [
                 'Content-Type' => [
