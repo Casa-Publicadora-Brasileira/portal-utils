@@ -29,6 +29,6 @@ class MethodNotAllowedHttpExceptionBuilder implements ErrorResponseBuilder
 
     public function registerSentry(Throwable $exception)
     {
-        app('sentry')->captureException($exception);
+        //
     }
 }

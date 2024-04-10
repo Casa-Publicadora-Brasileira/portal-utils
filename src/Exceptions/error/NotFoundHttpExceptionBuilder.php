@@ -30,6 +30,6 @@ class NotFoundHttpExceptionBuilder implements ErrorResponseBuilder
 
     public function registerSentry(Throwable $exception)
     {
-        app('sentry')->captureException($exception);
+        //
     }
 }
