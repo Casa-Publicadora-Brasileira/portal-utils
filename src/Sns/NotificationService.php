@@ -5,19 +5,17 @@ namespace CasaPublicadoraBrasileira\PortalUtils\Sns;
 use Aws\Credentials\Credentials;
 use Aws\Sns\SnsClient;
 
-class SnsDispatchNotification {
+class NotificationService
+{
     public static function notify($message): \Aws\Result
     {
         $client = new SnsClient([
-            'region'      => env('AWS_CPB_SNS_REGION'),
-            'credentials' => new Credentials(
-                env('AWS_CPB_SNS_ACCESS_KEY_ID'),
-                env('AWS_CPB_SNS_SECRET_ACCESS_KEY')
-            ),
+            'region'      => env('QUEUE_REGION'),
+            'credentials' => new Credentials(env('QUEUE_KEY'), env('QUEUE_SECRET')),
         ]);
 
         $result = $client->publish([
-            'TargetArn' => env('NOTIFICATION_QUEUE'),
+            'TargetArn' => env('QUEUE_TOPIC'),
             'Message' => json_encode(['default' => json_encode($message)]),
             'MessageStructure' => 'json',
             'MessageAttributes' => [
