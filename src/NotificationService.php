@@ -29,7 +29,7 @@ class NotificationService
         return $this;
     }
 
-    public function origin(array $origin): NotificationService
+    public function origin(string $origin): NotificationService
     {
         $this->origin = $origin;
         return $this;
