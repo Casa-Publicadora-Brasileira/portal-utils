@@ -12,18 +12,18 @@ class NotificationService
     private $groups = [];
     private $groupUsers = [];
 
-    public function __construct(String $message)
+    public function __construct(string $message)
     {
         $this->message = $message;
     }
 
 
-    public static function builder(String $message): NotificationService
+    public static function builder(string $message): NotificationService
     {
         return new NotificationService($message);
     }
 
-    public function message(String $message): NotificationService
+    public function message(string $message): NotificationService
     {
         $this->message = $message;
         return $this;
@@ -35,7 +35,7 @@ class NotificationService
         return $this;
     }
 
-    public function reference(array $reference): NotificationService
+    public function reference(mixed $reference): NotificationService
     {
         $this->reference = $reference;
         return $this;
@@ -84,16 +84,16 @@ class NotificationService
         }
 
         return  [
-                'message' => $this->message,
-                'origem' => $this->origin,
-                'reference' => [
-                    'type' => $this->reference['type'],
-                    'id' => $this->reference['id'],
-                ],
-                'userId' => $userIds ?? [],
-                'grade' => $grades ?? [],
-                'group' => $groups ?? [],
-                'groupUser' => $groupUsers ?? []
-            ];
+                    'message' => $this->message,
+                    'origem' => $this->origin,
+                    'reference' => [
+                        'type' => $this->reference['type'],
+                        'id' => $this->reference['id'],
+                    ],
+                    'userId' => $userIds ?? [],
+                    'grade' => $grades ?? [],
+                    'group' => $groups ?? [],
+                    'groupUser' => $groupUsers ?? []
+                ];
     }
 }
