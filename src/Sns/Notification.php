@@ -62,7 +62,7 @@ class Notification
         return $this;
     }
 
-    public function push(): Result
+    public function push(): ?Result
     {
         $data =   [
             'message' => $this->message,

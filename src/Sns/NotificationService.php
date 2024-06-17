@@ -8,8 +8,12 @@ use Aws\Sns\SnsClient;
 
 class NotificationService
 {
-    public static function notify($message): Result
+    public static function notify($message): ?Result
     {
+        if (collect(['QUEUE_REGION', 'QUEUE_KEY', 'QUEUE_SECRET', 'QUEUE_NOTIFICATION_TOPIC'])->some(fn ($key) => empty(env($key)))) {
+            return null;
+        }
+
         $client = new SnsClient([
             'region'      => env('QUEUE_REGION'),
             'credentials' => new Credentials(env('QUEUE_KEY'), env('QUEUE_SECRET')),
