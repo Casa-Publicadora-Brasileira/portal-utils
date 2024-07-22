@@ -11,6 +11,7 @@ class Notification
 
     private $message;
     private $reference;
+    private $responsibles;
     private $userIds = [];
     private $grades = [];
     private $groups = [];
@@ -35,6 +36,12 @@ class Notification
     public function reference(mixed $reference): Notification
     {
         $this->reference = $reference;
+        return $this;
+    }
+
+    public function withResponsibles(bool $responsibles): Notification
+    {
+        $this->responsibles = $responsibles;
         return $this;
     }
 
@@ -68,6 +75,7 @@ class Notification
             'message' => $this->message,
             'origin' => Str::lower(env('APP_NAME', 'unknown')),
             'reference' => $this->reference,
+            'withResponsibles' => $this->responsibles,
             'userIds' => $this->safeArray($this->userIds),
             'grades' => $this->safeArray($this->grades),
             'groups' => $this->safeArray($this->groups),
