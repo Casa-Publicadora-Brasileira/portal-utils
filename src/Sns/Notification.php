@@ -17,9 +17,7 @@ class Notification
     private $groups = [];
     private $groupUsers = [];
 
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
 
     public static function notify(): Notification
@@ -69,11 +67,11 @@ class Notification
         return $this;
     }
 
-    public function push(): ?Result
+    public function push(string $origin = null): ?Result
     {
         $data =   [
             'message' => $this->message,
-            'origin' => Str::lower(env('APP_NAME', 'unknown')),
+            'origin' => Str::lower($origin ?? env('APP_NAME', 'unknown')),
             'reference' => $this->reference,
             'withResponsibles' => $this->responsibles,
             'userIds' => $this->safeArray($this->userIds),
