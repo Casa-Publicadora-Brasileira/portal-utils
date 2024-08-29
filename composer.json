@@ -18,6 +18,13 @@
             "role": "Developer"
         }
     ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://github.com/Casa-Publicadora-Brasileira/portal-utils",
+            "canonical": false
+        }
+    ]
     "autoload": {
         "psr-4": {
             "CasaPublicadoraBrasileira\\PortalUtils\\": "src/"
