@@ -12,6 +12,7 @@ class Notification
     private $message;
     private $reference;
     private $responsibles;
+    private $origin;
     private $userIds = [];
     private $grades = [];
     private $groups = [];
@@ -34,6 +35,12 @@ class Notification
     public function reference(mixed $reference): Notification
     {
         $this->reference = $reference;
+        return $this;
+    }
+
+    public function origin(mixed $origin): Notification
+    {
+        $this->origin = $origin;
         return $this;
     }
 
@@ -67,23 +74,23 @@ class Notification
         return $this;
     }
 
-    public function push(string $origin = null): ?Result
+    public function push(): ?Result
     {
         $data =   [
             'message' => $this->message,
-            'origin' => Str::lower($origin ?? env('APP_NAME', 'unknown')),
+            'origin' => Str::lower($this->safe($this->origin, env('APP_NAME', 'unknown'))),
             'reference' => $this->reference,
             'withResponsibles' => $this->responsibles,
-            'userIds' => $this->safeArray($this->userIds),
-            'grades' => $this->safeArray($this->grades),
-            'groups' => $this->safeArray($this->groups),
-            'groupsUser' => $this->safeArray($this->groupUsers)
+            'userIds' => $this->safe($this->userIds),
+            'grades' => $this->safe($this->grades),
+            'groups' => $this->safe($this->groups),
+            'groupsUser' => $this->safe($this->groupUsers)
         ];
         return NotificationService::notify($data);
     }
 
-    private function safeArray($data)
+    private function safe($data, $default = [])
     {
-        return empty($data) ? [] : $data;
+        return empty($data) ? $default : $data;
     }
 }
