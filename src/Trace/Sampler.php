@@ -13,7 +13,7 @@ class Sampler
     {
         self::setScope();
         if (app()->environment('production')) {
-            return app()->runningInConsole() ? 0.05 : 0.2;
+            return app()->runningInConsole() ? 0.05 : env('SENTRY_TRACES_SAMPLE_RATE', 0.2);
         }
         return 1.0;
     }
