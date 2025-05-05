@@ -5,18 +5,17 @@ namespace CasaPublicadoraBrasileira\PortalUtils\Http;
 use CasaPublicadoraBrasileira\PortalUtils\Enums\HttpCodesEnum;
 use CasaPublicadoraBrasileira\PortalUtils\Enums\ResponseEnum;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\ExceptionHandler;
-use Illuminate\Support\Env;
 use Exception;
 
 class Response
 {
 
-    public static function success(string $msg = null, $data = null, array $params = [], bool $mobile = false)
+    public static function success(?string $msg = null, $data = null, array $params = [], bool $mobile = false)
     {
         return self::json(true, $msg, $data, $mobile, null, $params);
     }
 
-    public static function error(string $msg = null, Exception $exception = null, array $params = [], int $http = HttpCodesEnum::InternalError, bool $mobile = false)
+    public static function error(?string $msg = null, ?Exception $exception = null, array $params = [], int $http = HttpCodesEnum::InternalError, bool $mobile = false)
     {
         $erro = null;
         if (isset($exception)) {
@@ -29,12 +28,12 @@ class Response
         return self::json(false, $msg, null, $mobile, $erro, $params, $http);
     }
 
-    public static function warning(string $msg = null, $data = null, array $params = [], int $http = HttpCodesEnum::Success, bool $mobile = false)
+    public static function warning(?string $msg = null, $data = null, array $params = [], int $http = HttpCodesEnum::Success, bool $mobile = false)
     {
         return self::json(false, $msg, $data, $mobile, null, $params, $http);
     }
 
-    private static function json(bool $success, string $msg = null, $data = null, bool $mobile = false, string $erro = null, array $params = [], int $http = HttpCodesEnum::InternalError)
+    private static function json(bool $success, ?string $msg = null, $data = null, bool $mobile = false, ?string $erro = null, array $params = [], int $http = HttpCodesEnum::InternalError)
     {
         if ($mobile) {
             if ($success) {
@@ -50,7 +49,7 @@ class Response
 
     private static function cleanData($data): array
     {
-        return array_filter($data, fn ($value, $key) => !empty($value) || $key == 'data' || $key == 'ret' || $key == 'success', ARRAY_FILTER_USE_BOTH);
+        return array_filter($data, fn($value, $key) => !empty($value) || $key == 'data' || $key == 'ret' || $key == 'success', ARRAY_FILTER_USE_BOTH);
     }
 
     private static function getLastUpdatedAt($data): string
@@ -61,7 +60,7 @@ class Response
             }
             return self::getUpdatedAtObject($data);
         }
-        return null;
+        return date('Y-m-d');
     }
 
     private static function getUpdatedAtArray(array $data): string
