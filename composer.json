@@ -6,18 +6,10 @@
         "library",
         "utils",
         "Portal da educação",
-        "response",
         "CPB"
     ],
     "license": "MIT",
     "homepage": "https://github.com/Casa-Publicadora-Brasileira/portal-utils",
-    "authors": [
-        {
-            "name": "Josué Oliveira",
-            "email": "josue.oliveira@cpb.com.br",
-            "role": "Developer"
-        }
-    ],
     "repositories": [
         {
             "type": "composer",
@@ -31,7 +23,7 @@
         }
     },
     "require": {
-        "php": ">=7.4"
+        "php": "^8.2"
     },
     "config": {
         "allow-plugins": {
