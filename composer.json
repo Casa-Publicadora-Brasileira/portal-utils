@@ -28,6 +28,5 @@
         "sentry/sentry-laravel": "^4.13",
         "tymon/jwt-auth": "^2.2",
         "aws/aws-sdk-php": "^3.235"
-    },
-    "prefer-stable": true
+    }
 }
