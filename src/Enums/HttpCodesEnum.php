@@ -12,4 +12,5 @@ class HttpCodesEnum
     const Unauthorized = 401;
     const Forbidden = 403;
     const MethodNotAllowed = 405;
+    const Conflict = 409;
 }
