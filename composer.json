@@ -8,8 +8,7 @@
         "Portal da educação",
         "CPB"
     ],
-    "license": "MIT",
-    "homepage": "https://github.com/Casa-Publicadora-Brasileira/portal-utils",
+    "license": "proprietary",
     "autoload": {
         "psr-4": {
             "CasaPublicadoraBrasileira\\PortalUtils\\": "src/"
@@ -18,17 +17,23 @@
     "require": {
         "php": ">=8.2"
     },
-    "config": {
-        "allow-plugins": {
-            "php-http/discovery": true
-        }
-    },
     "require-dev": {
-        "phpunit/phpunit": "^9.6",
         "sentry/sentry-laravel": "^4.13",
         "laravel/framework": "^10.0",
         "tymon/jwt-auth": "^2.2",
         "aws/aws-sdk-php": "^3.235"
     },
-    "prefer-stable": true
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "CasaPublicadoraBrasileira\\PortalUtils\\PortalUtilsServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
 }
