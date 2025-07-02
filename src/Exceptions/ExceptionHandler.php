@@ -47,13 +47,13 @@ class ExceptionHandler
 
     public static function handler(Throwable $exception, Request $request)
     {
-        return (new self())->translator($exception, $request);
+        return (new self)->translator($exception, $request);
     }
 
     private function translator(Throwable $exception, Request $request)
     {
         $error = collect($this->builders)
-            ->first(fn (ErrorResponseBuilder $error) => $error->accept($exception), new ExceptionBuilder());
+            ->first(fn (ErrorResponseBuilder $error) => $error->accept($exception), new ExceptionBuilder);
 
         if (!app()->isLocal() && app()->bound('sentry')) {
             configureScope(function (Scope $scope) use ($request) {
