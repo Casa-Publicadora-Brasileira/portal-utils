@@ -5,12 +5,12 @@ namespace CasaPublicadoraBrasileira\PortalUtils\Sns;
 use Aws\Credentials\Credentials;
 use Aws\Sns\SnsClient;
 
-class SnsDispatchResolver
-{
+class SnsDispatchResolver {
+
     public static function send(string $targetArn, $id, array $message): \Aws\Result
     {
         $client = new SnsClient([
-            'region' => config('services.sns.region'),
+            'region'      => config('services.sns.region'),
             'credentials' => new Credentials(
                 config('services.sns.key'),
                 config('services.sns.secret')
@@ -28,7 +28,7 @@ class SnsDispatchResolver
                     'DataType' => 'String',
                     'StringValue' => 'application/json',
                 ],
-            ],
+            ]
         ]);
 
         return $result;

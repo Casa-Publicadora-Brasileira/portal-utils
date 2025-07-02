@@ -2,23 +2,23 @@
 
 namespace CasaPublicadoraBrasileira\PortalUtils\Exceptions;
 
+use Throwable;
+use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\TokenExpiredExceptionBuilder;
+use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\TokenInvalidExceptionBuilder;
+use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\TokenBlacklistedExceptionBuilder;
+use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\UnauthorizedHttpExceptionBuilder;
+use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\MethodNotAllowedHttpExceptionBuilder;
+use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\ValidationExceptionBuilder;
+use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\NotFoundHttpExceptionBuilder;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\AccessDeniedHttpExceptionBuilder;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\AuthenticationExceptionBuilder;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\AuthorizationExceptionBuilder;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\ExceptionBuilder;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\HttpExceptionBuilder;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\JWTExceptionBuilder;
-use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\MethodNotAllowedHttpExceptionBuilder;
-use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\NotFoundHttpExceptionBuilder;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\OperationExceptionBuilder;
-use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\TokenBlacklistedExceptionBuilder;
-use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\TokenExpiredExceptionBuilder;
-use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\TokenInvalidExceptionBuilder;
-use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\UnauthorizedHttpExceptionBuilder;
-use CasaPublicadoraBrasileira\PortalUtils\Exceptions\error\ValidationExceptionBuilder;
 use Illuminate\Http\Request;
 use Sentry\State\Scope;
-use Throwable;
 
 use function Sentry\configureScope;
 
@@ -28,7 +28,7 @@ class ExceptionHandler
 
     private function __construct()
     {
-        $this->builders = [
+        $this->builders =  [
             new TokenBlacklistedExceptionBuilder(),
             new TokenExpiredExceptionBuilder(),
             new TokenInvalidExceptionBuilder(),

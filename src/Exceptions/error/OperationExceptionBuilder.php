@@ -2,9 +2,10 @@
 
 namespace CasaPublicadoraBrasileira\PortalUtils\Exceptions\error;
 
-use CasaPublicadoraBrasileira\PortalUtils\Enums\HttpCodesEnum;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\ErrorResponseBuilder;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\OperationException;
+use CasaPublicadoraBrasileira\PortalUtils\Enums\HttpCodesEnum;
+
 use Throwable;
 
 class OperationExceptionBuilder implements ErrorResponseBuilder

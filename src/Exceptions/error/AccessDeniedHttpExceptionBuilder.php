@@ -2,8 +2,8 @@
 
 namespace CasaPublicadoraBrasileira\PortalUtils\Exceptions\error;
 
-use CasaPublicadoraBrasileira\PortalUtils\Enums\HttpCodesEnum;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\ErrorResponseBuilder;
+use CasaPublicadoraBrasileira\PortalUtils\Enums\HttpCodesEnum;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Throwable;
 
