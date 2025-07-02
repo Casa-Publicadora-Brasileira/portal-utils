@@ -2,8 +2,8 @@
 
 namespace CasaPublicadoraBrasileira\PortalUtils\Sns;
 
-use Aws\Result;
 use Aws\Credentials\Credentials;
+use Aws\Result;
 use Aws\Sns\SnsClient;
 
 class NotificationService
@@ -15,7 +15,7 @@ class NotificationService
         }
 
         $client = new SnsClient([
-            'region'      => env('QUEUE_REGION'),
+            'region' => env('QUEUE_REGION'),
             'credentials' => new Credentials(env('QUEUE_KEY'), env('QUEUE_SECRET')),
         ]);
 
@@ -28,8 +28,9 @@ class NotificationService
                     'DataType' => 'String',
                     'StringValue' => 'application/json',
                 ],
-            ]
+            ],
         ]);
+
         return $result;
     }
 }
