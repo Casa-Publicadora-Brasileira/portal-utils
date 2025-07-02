@@ -29,19 +29,19 @@ class ExceptionHandler
     private function __construct()
     {
         $this->builders = [
-            new TokenBlacklistedExceptionBuilder,
-            new TokenExpiredExceptionBuilder,
-            new TokenInvalidExceptionBuilder,
-            new UnauthorizedHttpExceptionBuilder,
-            new MethodNotAllowedHttpExceptionBuilder,
-            new NotFoundHttpExceptionBuilder,
-            new AccessDeniedHttpExceptionBuilder,
-            new ValidationExceptionBuilder,
-            new OperationExceptionBuilder,
-            new JWTExceptionBuilder,
-            new HttpExceptionBuilder,
-            new AuthenticationExceptionBuilder,
-            new AuthorizationExceptionBuilder,
+            new TokenBlacklistedExceptionBuilder(),
+            new TokenExpiredExceptionBuilder(),
+            new TokenInvalidExceptionBuilder(),
+            new UnauthorizedHttpExceptionBuilder(),
+            new MethodNotAllowedHttpExceptionBuilder(),
+            new NotFoundHttpExceptionBuilder(),
+            new AccessDeniedHttpExceptionBuilder(),
+            new ValidationExceptionBuilder(),
+            new OperationExceptionBuilder(),
+            new JWTExceptionBuilder(),
+            new HttpExceptionBuilder(),
+            new AuthenticationExceptionBuilder(),
+            new AuthorizationExceptionBuilder(),
         ];
     }
 
