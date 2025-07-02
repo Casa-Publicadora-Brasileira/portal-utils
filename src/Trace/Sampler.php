@@ -2,8 +2,8 @@
 
 namespace CasaPublicadoraBrasileira\PortalUtils\Trace;
 
-use Sentry\Tracing\SamplingContext;
 use Sentry\State\Scope;
+use Sentry\Tracing\SamplingContext;
 
 use function Sentry\configureScope;
 
@@ -15,6 +15,7 @@ class Sampler
         if (app()->environment('production')) {
             return app()->runningInConsole() ? 0.05 : env('SENTRY_TRACES_SAMPLE_RATE', 0.2);
         }
+
         return 1.0;
     }
 

@@ -9,7 +9,6 @@ use Exception;
 
 class Response
 {
-
     public static function success(?string $msg = null, $data = null, array $params = [], bool $mobile = false)
     {
         return self::json(true, $msg, $data, $mobile, null, $params);
@@ -39,17 +38,19 @@ class Response
             if ($success) {
                 return response()->json(self::cleanData(['success' => true, 'last_released' => self::getLastUpdatedAt($data), 'data' => $data, 'msg' => $msg] + $params));
             }
+
             return response()->json(self::cleanData(['success' => false, 'msg' => $msg, 'erro' => $erro] + $params), $http);
         }
         if ($success) {
             return response()->json(self::cleanData(['ret' => ResponseEnum::SuccessResponse, 'msg' => $msg, 'data' => $data] + $params));
         }
+
         return response()->json(self::cleanData(['ret' => ResponseEnum::FailedResponse, 'msg' => $msg, 'erro' => $erro] + $params), $http);
     }
 
     private static function cleanData($data): array
     {
-        return array_filter($data, fn($value, $key) => !empty($value) || $key == 'data' || $key == 'ret' || $key == 'success', ARRAY_FILTER_USE_BOTH);
+        return array_filter($data, fn ($value, $key) => !empty($value) || $key == 'data' || $key == 'ret' || $key == 'success', ARRAY_FILTER_USE_BOTH);
     }
 
     private static function getLastUpdatedAt($data): string
@@ -58,8 +59,10 @@ class Response
             if (is_array($data)) {
                 return self::getUpdatedAtArray($data);
             }
+
             return self::getUpdatedAtObject($data);
         }
+
         return date('Y-m-d');
     }
 
@@ -68,6 +71,7 @@ class Response
         if (array_key_exists('updated_at', $data)) {
             return is_null($data['updated_at']) ? date('Y-m-d H:i:s') : $data['updated_at'];
         }
+
         return self::getParameter('updated_at', $data);
     }
 
@@ -76,6 +80,7 @@ class Response
         if (array_key_exists('updated_at', $data->toArray())) {
             return is_null($data['updated_at']) ? date('Y-m-d H:i:s') : $data['updated_at'];
         }
+
         return self::getParameter('updated_at', $data);
     }
 
@@ -89,7 +94,7 @@ class Response
                         $last = $d[$parameter];
                     }
                 }
-            } else if (is_array($d)) {
+            } elseif (is_array($d)) {
                 if (array_key_exists($parameter, $d)) {
                     if (!is_null($d[$parameter]) && $last > $d[$parameter]) {
                         $last = $d[$parameter];
@@ -97,6 +102,7 @@ class Response
                 }
             }
         }
+
         return $last;
     }
 }
