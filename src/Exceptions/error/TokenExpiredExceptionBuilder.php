@@ -4,8 +4,8 @@ namespace CasaPublicadoraBrasileira\PortalUtils\Exceptions\error;
 
 use CasaPublicadoraBrasileira\PortalUtils\Enums\HttpCodesEnum;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\ErrorResponseBuilder;
-use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Throwable;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 
 class TokenExpiredExceptionBuilder implements ErrorResponseBuilder
 {

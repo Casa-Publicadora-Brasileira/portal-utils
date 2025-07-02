@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "pint": "vendor/bin/pint"
+  },
+  "lint-staged": {
+    "*.php": "vendor/bin/pint --dirty"
+  }
+}

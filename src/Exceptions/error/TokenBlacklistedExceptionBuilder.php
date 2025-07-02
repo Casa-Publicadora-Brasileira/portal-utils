@@ -4,8 +4,8 @@ namespace CasaPublicadoraBrasileira\PortalUtils\Exceptions\error;
 
 use CasaPublicadoraBrasileira\PortalUtils\Enums\HttpCodesEnum;
 use CasaPublicadoraBrasileira\PortalUtils\Exceptions\ErrorResponseBuilder;
-use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
 use Throwable;
+use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
 
 class TokenBlacklistedExceptionBuilder implements ErrorResponseBuilder
 {

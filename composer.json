@@ -21,7 +21,8 @@
         "sentry/sentry-laravel": "^4.13",
         "laravel/framework": "^10.0",
         "tymon/jwt-auth": "^2.2",
-        "aws/aws-sdk-php": "^3.235"
+        "aws/aws-sdk-php": "^3.235",
+        "laravel/pint": "^1.22"
     },
     "prefer-stable": true,
     "extra": {

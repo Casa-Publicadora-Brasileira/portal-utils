@@ -13,8 +13,8 @@ class PortalUtilsServiceProvider extends ServiceProvider
     {
         $this->loadTranslationsFrom(__DIR__ . '/lang', 'cpb');
         if (config('app.debug')) {
-            DB::listen(fn($query) => logger($query->sql, $query->bindings));
+            DB::listen(fn ($query) => logger($query->sql, $query->bindings));
         }
-        Auth::provider('cached', fn($app, array $config) => new CachedUserProvider($app['hash'], $config['model']));
+        Auth::provider('cached', fn ($app, array $config) => new CachedUserProvider($app['hash'], $config['model']));
     }
 }

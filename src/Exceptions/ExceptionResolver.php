@@ -34,8 +34,7 @@ trait ExceptionResolver
     public function register()
     {
         $this->renderable(
-            fn (Throwable $exception, $request) =>
-            ExceptionHandler::handler($exception, $request)
+            fn (Throwable $exception, $request) => ExceptionHandler::handler($exception, $request)
         );
     }
 }
