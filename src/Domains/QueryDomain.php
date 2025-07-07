@@ -2,6 +2,7 @@
 
 namespace CasaPublicadoraBrasileira\PortalUtils\Domains;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,7 +20,7 @@ abstract class QueryDomain
         return static::$model::all($columns);
     }
 
-    public static function withRelations(array $relations): \Illuminate\Database\Eloquent\Builder
+    public static function withRelations(array $relations): Builder
     {
         return static::$model::with($relations);
     }

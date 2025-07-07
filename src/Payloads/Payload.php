@@ -35,7 +35,7 @@ abstract class Payload
         }
     }
 
-    private function validate(): void
+    protected function validate(): void
     {
         $validator = Validator::make($this->toArray(), $this->rules());
 
