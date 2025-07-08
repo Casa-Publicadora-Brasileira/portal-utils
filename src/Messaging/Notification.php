@@ -1,6 +1,6 @@
 <?php
 
-namespace CasaPublicadoraBrasileira\PortalUtils\Sns;
+namespace CasaPublicadoraBrasileira\PortalUtils\Messaging;
 
 use Aws\Result;
 use Illuminate\Support\Str;
@@ -81,7 +81,7 @@ class Notification
 
     public function push(): ?Result
     {
-        $data = [
+        $message = [
             'message' => $this->message,
             'origin' => Str::lower($this->safe($this->origin, env('APP_NAME', 'unknown'))),
             'reference' => $this->reference,
@@ -92,7 +92,7 @@ class Notification
             'groupsUser' => $this->safe($this->groupUsers),
         ];
 
-        return NotificationService::notify($data);
+        return Topic::send(arn: config('services.sns.topic'), message: $message);
     }
 
     private function safe($data, $default = [])
