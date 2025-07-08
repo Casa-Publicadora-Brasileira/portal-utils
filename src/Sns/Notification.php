@@ -20,7 +20,7 @@ class Notification
 
     public static function notify(): Notification
     {
-        return new Notification;
+        return new Notification();
     }
 
     public function message(string $message): Notification
