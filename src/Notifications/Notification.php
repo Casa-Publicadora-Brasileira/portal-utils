@@ -1,8 +1,9 @@
 <?php
 
-namespace CasaPublicadoraBrasileira\PortalUtils\Messaging;
+namespace CasaPublicadoraBrasileira\PortalUtils\Notifications;
 
 use Aws\Result;
+use CasaPublicadoraBrasileira\PortalUtils\Messaging\Topic;
 use Illuminate\Support\Str;
 
 class Notification
@@ -37,7 +38,7 @@ class Notification
         return $this;
     }
 
-    public function origin(mixed $origin): Notification
+    public function origin(OriginEnum $origin): Notification
     {
         $this->origin = $origin;
 
@@ -83,13 +84,13 @@ class Notification
     {
         $message = [
             'message' => $this->message,
-            'origin' => Str::lower($this->safe($this->origin, env('APP_NAME', 'unknown'))),
+            'origin' => Str::lower($this->safe($this->origin->value, env('APP_NAME', 'unknown'))),
             'reference' => $this->reference,
-            'withResponsibles' => $this->responsibles,
-            'userIds' => $this->safe($this->userIds),
+            'with_responsibles' => $this->responsibles || false,
+            'user_ids' => $this->safe($this->userIds),
             'grades' => $this->safe($this->grades),
             'groups' => $this->safe($this->groups),
-            'groupsUser' => $this->safe($this->groupUsers),
+            'groups_user' => $this->safe($this->groupUsers),
         ];
 
         return Topic::send(arn: config('services.sns.topic'), message: $message);

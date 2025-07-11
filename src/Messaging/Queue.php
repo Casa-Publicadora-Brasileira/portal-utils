@@ -11,7 +11,7 @@ class QueueDispatch implements Message
 {
     private ?SqsClient $client;
 
-    public function __construct(string $config)
+    public function __construct(?string $config)
     {
         $this->client = self::client($config);
     }
@@ -46,8 +46,9 @@ class QueueDispatch implements Message
         return null;
     }
 
-    private static function client(string $config): ?SqsClient
+    private static function client(?string $config): ?SqsClient
     {
+        $config = $config ?: 'sqs';
         if ((bool) config("queue.connections.{$config}.key") && (bool) config("queue.connections.{$config}.secret")) {
             return new SqsClient([
                 'version' => 'latest',

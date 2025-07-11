@@ -10,7 +10,7 @@ class TopicDispatch implements Message
 {
     private ?SnsClient $client;
 
-    public function __construct(string $config)
+    public function __construct(?string $config)
     {
         $this->client = self::client($config);
     }
@@ -59,8 +59,9 @@ class TopicDispatch implements Message
         return null;
     }
 
-    private static function client(string $config): ?SnsClient
+    private static function client(?string $config): ?SnsClient
     {
+        $config = $config ?: 'sns';
         if ((bool) config("services.{$config}.key") && (bool) config("services.{$config}.secret")) {
             return new SnsClient([
                 'version' => 'latest',
