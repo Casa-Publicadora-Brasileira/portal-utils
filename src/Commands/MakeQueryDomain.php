@@ -16,7 +16,7 @@ class MakeQueryDomain extends Command
         $model = $this->option('model');
         $classPath = str_replace('/', '\\', $input);
         $className = class_basename($classPath);
-        $relativePath = str_replace('\\', '/', $classPath) . 'Domain.php';
+        $relativePath = str_replace('\\', '/', $classPath) . 'QueryDomain.php';
         $path = app_path("Domains/{$relativePath}");
         $segments = explode('/', $input);
         array_pop($segments);
