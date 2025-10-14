@@ -111,4 +111,13 @@ class Utils
         echo '</pre>';
         exit(0);
     }
+
+    public static function safeArray(array $array): mixed
+    {
+        if (in_array(null, $array, true)) {
+            return null;
+        }
+
+        return $array;
+    }
 }

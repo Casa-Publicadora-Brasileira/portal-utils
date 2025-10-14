@@ -16,8 +16,8 @@ abstract class Payload
      */
     public function __construct(array $attributes = [])
     {
+        $this->validate($attributes);
         $this->fill($attributes);
-        $this->validate();
     }
 
     /**
@@ -95,15 +95,15 @@ abstract class Payload
     }
 
     /**
-     * @description Valida os dados do payload usando as regras definidas.
+     * @description Valida os dados fornecidos de acordo com as regras definidas.
      *
-     * @param void
+     * @param  array  $data  Dados a serem validados.
      *
-     * @throws Illuminate\Validation\ValidationException Se a validação falhar.
+     * @throws Illuminate\Validation\ValidationException Se algum dado não atender às regras.
      */
-    protected function validate(): void
+    protected function validate(array $data): void
     {
-        $validator = Validator::make($this->toArray(), $this->rules());
+        $validator = Validator::make($data, $this->rules());
 
         if ($validator->fails()) {
             throw new ValidationException($validator);
