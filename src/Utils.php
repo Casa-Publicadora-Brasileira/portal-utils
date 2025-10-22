@@ -104,14 +104,6 @@ class Utils
         return array_map('unserialize', array_values(array_unique(array_map('serialize', $array))));
     }
 
-    public static function debugArray(array $array): void
-    {
-        echo '<pre>';
-        print_r($array);
-        echo '</pre>';
-        exit(0);
-    }
-
     public static function safeArray(array $array): mixed
     {
         if (in_array(null, $array, true)) {
@@ -119,5 +111,13 @@ class Utils
         }
 
         return $array;
+    }
+
+    public static function debugArray(array $array): void
+    {
+        echo '<pre>';
+        print_r($array);
+        echo '</pre>';
+        exit(0);
     }
 }
