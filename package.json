@@ -1,13 +1,16 @@
 {
-  "devDependencies": {
-    "husky": "^9.1.7",
-    "lint-staged": "^16.1.2"
-  },
-  "scripts": {
-    "prepare": "husky",
-    "pint": "vendor/bin/pint"
-  },
-  "lint-staged": {
-    "*.php": "vendor/bin/pint --dirty"
-  }
+    "$schema": "https://json.schemastore.org/package.json",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "prepare": "husky",
+        "pint": "vendor/bin/pint"
+    },
+    "devDependencies": {
+        "husky": "^9.1.7",
+        "lint-staged": "^16.1.2"
+    },
+    "lint-staged": {
+        "*.php": "vendor/bin/pint --dirty"
+    }
 }
