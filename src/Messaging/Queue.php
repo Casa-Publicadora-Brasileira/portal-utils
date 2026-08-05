@@ -2,9 +2,12 @@
 
 namespace CasaPublicadoraBrasileira\PortalUtils\Messaging;
 
+use Aws\Credentials\CredentialProvider;
 use Aws\Credentials\Credentials;
 use Aws\Result;
 use Aws\Sqs\SqsClient;
+use Exception;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class QueueDispatch implements Message
@@ -48,20 +51,34 @@ class QueueDispatch implements Message
 
     private static function client(?string $config): ?SqsClient
     {
+
+        $providers = [];
         $config = $config ?: 'sqs';
+
         if ((bool) config("queue.connections.{$config}.key") && (bool) config("queue.connections.{$config}.secret")) {
-            return new SqsClient([
-                'version' => 'latest',
-                'region' => config("queue.connections.{$config}.region"),
-                'credentials' => new Credentials(
-                    config("queue.connections.{$config}.key"),
-                    config("queue.connections.{$config}.secret"),
-                    config("queue.connections.{$config}.token")
-                ),
-            ]);
+            $credentials = new Credentials(config("queue.connections.{$config}.key"), config("queue.connections.{$config}.secret"), config("queue.connections.{$config}.token"));
+            $providers[] = CredentialProvider::fromCredentials($credentials);
         }
 
-        return null;
+        $providers[] = CredentialProvider::instanceProfile();
+        $providers[] = CredentialProvider::env();
+        $providers[] = CredentialProvider::ini();
+
+        $provider = CredentialProvider::chain(...$providers);
+
+        try {
+            $provider()->wait();
+        } catch (Exception $e) {
+            Log::error('Não foi possível obter credenciais da AWS.', ['service' => 'SQS', 'message' => $e->getMessage(), 'exception' => $e]);
+
+            return null;
+        }
+
+        return new SqsClient([
+            'version' => 'latest',
+            'region' => config("queue.connections.{$config}.region"),
+            'credentials' => $provider,
+        ]);
     }
 }
 
