@@ -70,20 +70,6 @@ abstract class Payload
         }
 
         if ($action === 'set') {
-            if (!array_key_exists(0, $arguments)) {
-                throw new BadMethodCallException(sprintf(
-                    'Method %s::%s() expects 1 argument.',
-                    static::class,
-                    $method
-                ));
-            }
-
-            $data = [
-                $property => $arguments[0],
-            ];
-
-            $this->validate($data);
-
             $this->{$property} = $arguments[0];
 
             return $this;
